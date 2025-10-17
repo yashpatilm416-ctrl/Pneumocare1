@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Report</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/report.css">
+</head>
+<body>
+ <nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-success" href="/">PneumoCare</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/add">Add Patient</a></li>
+        <li class="nav-item"><a class="nav-link" href="/reports">View Reports</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+  <div class="container report-container mt-5">
+    <h2 class="text-center mb-4">Patient Report</h2>
+    <table class="table table-bordered">
+      <tr><th>Name</th><td><%= patient.sname %></td></tr>
+      <tr><th>Age</th><td><%= patient.age %></td></tr>
+      <tr><th>WBC Count</th><td><%= patient.WBC_Count %></td></tr>
+      <tr><th>Neutrophils %</th><td><%= patient.Neutrophils_Percent %></td></tr>
+      <tr><th>CRP Level</th><td><%= patient.CRP_Level %></td></tr>
+      <tr><th>Oxygen Level</th><td><%= patient.Oxygen_Level %></td></tr>
+      <tr><th>Result</th>
+        <td class="<%= patient.Result === 'Suffering from Pneumonia' ? 'text-danger' : (patient.Result === 'Maybe Pneumonia' ? 'text-warning' : 'text-success') %>">
+          <%= patient.Result %>
+        </td>
+      </tr>
+    </table>
+    <div class="text-center mt-3">
+      <a href="/reports" class="btn btn-primary">View All Reports</a>
+    </div>
+  </div>
+</body>
+</html>

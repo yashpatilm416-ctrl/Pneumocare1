@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View Reports | PneumoCare</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/viewReports.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-success" href="/">PneumoCare</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/add">Add Patient</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/reports">View Reports</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Report Table -->
+  <section class="reports-section container mt-5 mb-5">
+    <h1 class="text-center mb-4">Patient Reports</h1>
+
+    <% if (patients.length === 0) { %>
+      <p class="text-center text-muted">No reports available.</p>
+    <% } else { %>
+      <div class="table-responsive">
+        <table class="table table-bordered text-center align-middle">
+          <thead class="table-success">
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>WBC Count</th>
+              <th>Neutrophils %</th>
+              <th>CRP Level</th>
+              <th>Oxygen Level</th>
+              <th>Result</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% patients.forEach(patient => { %>
+              <tr>
+                <td><%= patient.sname %></td>
+                <td><%= patient.age %></td>
+                <td><%= patient.WBC_Count %></td>
+                <td><%= patient.Neutrophils_Percent %></td>
+                <td><%= patient.CRP_Level %></td>
+                <td><%= patient.Oxygen_Level %></td>
+                <td><%= patient.Result %></td>
+                <td>
+                  <form action="/delete/<%= patient.id %>" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+
+      <form action="/deleteAll" method="POST" class="text-center mt-4">
+        <button type="submit" class="btn btn-outline-danger px-5 py-2">Delete All Reports</button>
+      </form>
+    <% } %>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 PneumoCare | All Rights Reserved</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
